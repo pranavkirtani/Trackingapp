@@ -1,0 +1,43 @@
+<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+
+
+<h1>Welcome to tracking app</h1>
+<html ng-app='myApp'>
+    <div id="googleMap" style="width:500px;height:380px;"></div>
+<ng-view>
+    
+</ng-view>
+<script>
+    
+    
+    function sleep(seconds) {
+            var e = new Date().getTime() + (seconds * 1000);
+            while (new Date().getTime() <= e) {}
+       
+        }
+  var socket = io('http://localhost:9000');
+    socket.on('connect',function(){
+          socket.on('start', function (data) {
+      var count=0;
+    for(var i=0;i<10;i++){
+        
+        sleep(4);
+        socket.emit('start_sending', { lat: count,long:-0.5 });
+        count=count+10;
+        
+    }
+  
+      count+=10;
+ 
+      
+         
+     
+    
+  });
+    
+    
+    
+    })
+
+</script>
+</html>

@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-route.js'></script>
+<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
+<script src='/javascripts/app.js'></script>
+<script src='/javascripts/mapController.js'></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript">
+		/*	function initialize() {
+                var myCenter=new google.maps.LatLng(40,-0.120850);
+  var mapProp = {
+  center:myCenter,
+  zoom:5,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker=new google.maps.Marker({
+  position:myCenter,
+  });
+
+marker.setMap(map);
+}*/
+
+		</script>
+
+
+
+<script>
+  var socket = io('http://localhost:9000');
+  socket.on('news', function (data) {
+      
+      
+      (function initialize(args) {
+                var myCenter=new google.maps.LatLng(args.lat,args.long);
+  var mapProp = {
+  center:myCenter,
+  zoom:,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker=new google.maps.Marker({
+  position:myCenter,
+  });
+
+marker.setMap(map);
+})(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+
+<h1>Welcome to tracking app</h1>
+<html ng-app='myApp'>
+    <div id="googleMap" style="width:500px;height:380px;"></div>
+<ng-view>
+    
+</ng-view>
+
+</html>
